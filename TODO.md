@@ -21,15 +21,15 @@
 
 ## Phase 2: Preserve Python Application
 
-- [ ] 2.1 Create `python-server/` directory
-- [ ] 2.2 Move all Python source files to `python-server/`: `server.py`, `engine.py`, `config.py`, `models.py`, `utils.py`, `download_model.py`, `start.py`
-- [ ] 2.3 Move Python dependency files to `python-server/`: `requirements.txt`, `requirements-nvidia.txt`, `requirements-nvidia-cu128.txt`, `requirements-rocm.txt`
-- [ ] 2.4 Move Docker files to `python-server/`: all `Dockerfile*` and `docker-compose*.yml`
-- [ ] 2.5 Move original frontend to `python-server/ui/`: `index.html`, `script.js`, `styles.css`, `presets.yaml`, `vendor/`
-- [ ] 2.6 Move shell scripts to `python-server/`: `start.sh`, `start.bat`
-- [ ] 2.7 Move supplementary files to `python-server/`: `Chatterbox_TTS_Colab_Demo.ipynb`, `documentation.md`, `static/`
-- [ ] 2.8 Copy `ui/presets.yaml` to project root as `presets.yaml` for Node.js app
-- [ ] 2.9 Verify Python app structure is intact in `python-server/` and all files accounted for
+- [✅] 2.1 Create `python-server/` directory
+- [✅] 2.2 Move all Python source files to `python-server/`: `server.py`, `engine.py`, `config.py`, `models.py`, `utils.py`, `download_model.py`, `start.py`
+- [✅] 2.3 Move Python dependency files to `python-server/`: `requirements.txt`, `requirements-nvidia.txt`, `requirements-nvidia-cu128.txt`, `requirements-rocm.txt`
+- [✅] 2.4 Move Docker files to `python-server/`: all `Dockerfile*` and `docker-compose*.yml`
+- [✅] 2.5 Move original frontend to `python-server/ui/`: `index.html`, `script.js`, `styles.css`, `presets.yaml`, `vendor/`
+- [✅] 2.6 Move shell scripts to `python-server/`: `start.sh`, `start.bat`
+- [✅] 2.7 Move supplementary files to `python-server/`: `Chatterbox_TTS_Colab_Demo.ipynb`, `documentation.md`, `static/`
+- [✅] 2.8 Copy `ui/presets.yaml` to project root as `presets.yaml` for Node.js app
+- [✅] 2.9 Verify Python app structure is intact in `python-server/` and all files accounted for
 
 ## Phase 3: Core Infrastructure
 
