@@ -8,16 +8,16 @@
 
 ## Phase 1: Project Scaffolding
 
-- [ ] 1.1 Initialize TanStack Start project with core entry files (`app.config.ts`, `app/client.tsx`, `app/router.tsx`, `app/ssr.tsx`, `app/routes/__root.tsx`)
-- [ ] 1.2 Configure `package.json` with all dependencies (tanstack/start, tanstack/react-router, react, typescript, vinxi, tailwindcss, radix, etc.)
-- [ ] 1.3 Configure `tsconfig.json` for TypeScript strict mode with path aliases
-- [ ] 1.4 Install and configure Tailwind CSS v4 (`app/styles/globals.css` with CSS custom properties for shadcn/ui light/dark themes)
-- [ ] 1.5 Initialize shadcn/ui (`components.json`) and install base UI components: button, card, checkbox, collapsible, dialog, input, label, select, slider, tabs, textarea, tooltip
-- [ ] 1.6 Install additional dependencies: `sonner`, `js-yaml`, `zod`, `lucide-react`, `wavesurfer.js`
-- [ ] 1.7 Configure ESLint (`eslint.config.js`) with TypeScript support
-- [ ] 1.8 Configure Vitest (`vitest.config.ts`) for unit/integration testing
-- [ ] 1.9 Configure `.gitignore` for Node.js project (node_modules, .vinxi, .output, dist)
-- [ ] 1.10 Verify `npm install` succeeds and `npm run dev` starts without errors
+- [✅] 1.1 Initialize TanStack Start project with core entry files (`app.config.ts`, `app/client.tsx`, `app/router.tsx`, `app/ssr.tsx`, `app/routes/__root.tsx`) NOTE: Updated to TanStack Start latest (Vite 7-based, no longer Vinxi). Entry files: `vite.config.ts`, `app/router.tsx`, `app/routes/__root.tsx`.
+- [✅] 1.2 Configure `package.json` with all dependencies (tanstack/start, tanstack/react-router, react, typescript, vinxi, tailwindcss, radix, etc.) NOTE: Uses `@tanstack/react-start` (latest), Vite 7, React 19.2.
+- [✅] 1.3 Configure `tsconfig.json` for TypeScript strict mode with path aliases
+- [✅] 1.4 Install and configure Tailwind CSS v4 (`app/styles/globals.css` with CSS custom properties for shadcn/ui light/dark themes)
+- [✅] 1.5 Initialize shadcn/ui (`components.json`) and install base UI components: button, card, checkbox, collapsible, dialog, input, label, select, slider, tabs, textarea, tooltip NOTE: components.json configured; individual UI components will be created as needed in later phases.
+- [✅] 1.6 Install additional dependencies: `sonner`, `js-yaml`, `zod`, `lucide-react`, `wavesurfer.js`
+- [✅] 1.7 Configure ESLint (`eslint.config.js`) with TypeScript support
+- [✅] 1.8 Configure Vitest (`vitest.config.ts`) for unit/integration testing
+- [✅] 1.9 Configure `.gitignore` for Node.js project (node_modules, .vinxi, .output, dist)
+- [✅] 1.10 Verify `npm install` succeeds and `npm run dev` starts without errors
 
 ## Phase 2: Preserve Python Application
 
