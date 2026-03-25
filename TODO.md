@@ -58,21 +58,21 @@
 
 ## Phase 5: TTS Form Components
 
-- [ ] 5.1 Create `app/components/model-selector.tsx` — Model dropdown (Original/Turbo/Multilingual) + "Apply & Restart" button with pending state indicator
-- [ ] 5.2 Create `app/components/text-input.tsx` — Textarea with live character count, placeholder text
-- [ ] 5.3 Create `app/components/paralinguistic-tags.tsx` — Tag insertion buttons ([laugh], [chuckle], [sigh], etc.) — visible only for turbo model
-- [ ] 5.4 Create `app/components/chunk-controls.tsx` — "Split text into chunks" checkbox + chunk size slider (50–1000) with explanation text
-- [ ] 5.5 Create `app/components/voice-selector.tsx` — Tabs component switching between predefined/clone voice modes
-- [ ] 5.6 Create `app/components/predefined-voices.tsx` — Voice dropdown + import file button + refresh button
-- [ ] 5.7 Create `app/components/clone-voices.tsx` — Reference audio dropdown + import file button + refresh button
-- [ ] 5.8 Create `app/components/preset-buttons.tsx` — Preset quick-select buttons with model-type filtering and active highlight
-- [ ] 5.9 Create `app/components/generation-params.tsx` — Sliders for temperature, exaggeration, cfg_weight, speed_factor with value displays and speed warning
-- [ ] 5.10 Create `app/components/language-select.tsx` — Language dropdown (23 languages for multilingual, english-only otherwise), conditionally visible
-- [ ] 5.11 Create `app/components/output-format.tsx` — WAV/MP3/Opus format selector with description hint
-- [ ] 5.12 Create `app/components/tts-form.tsx` — Assembles all form sub-components into the complete TTS generation form
-- [ ] 5.13 Create `app/hooks/use-tts-generation.ts` — Form state management, validation logic, generation submission, audio result state
-- [ ] 5.14 Create `app/hooks/use-ui-state.ts` — Debounced (750ms) UI state persistence to server via saveSettings
-- [ ] 5.15 Create `app/hooks/use-model-info.ts` — Model info state, pending model change tracking, model-type derived UI flags
+- [✅] 5.1 Create `app/components/model-selector.tsx` — Model dropdown (Original/Turbo/Multilingual) + "Apply & Restart" button with pending state indicator
+- [✅] 5.2 Create `app/components/text-input.tsx` — Textarea with live character count, placeholder text
+- [✅] 5.3 Create `app/components/paralinguistic-tags.tsx` — Tag insertion buttons ([laugh], [chuckle], [sigh], etc.) — visible only for turbo model
+- [✅] 5.4 Create `app/components/chunk-controls.tsx` — "Split text into chunks" checkbox + chunk size slider (50–1000) with explanation text
+- [✅] 5.5 Create `app/components/voice-selector.tsx` — Tabs component switching between predefined/clone voice modes
+- [✅] 5.6 Create `app/components/predefined-voices.tsx` — Voice dropdown + import file button + refresh button
+- [✅] 5.7 Create `app/components/clone-voices.tsx` — Reference audio dropdown + import file button + refresh button
+- [✅] 5.8 Create `app/components/preset-buttons.tsx` — Preset quick-select buttons with model-type filtering and active highlight
+- [✅] 5.9 Create `app/components/generation-params.tsx` — Sliders for temperature, exaggeration, cfg_weight, speed_factor with value displays and speed warning
+- [✅] 5.10 Create `app/components/language-select.tsx` — Language dropdown (23 languages for multilingual, english-only otherwise), conditionally visible
+- [✅] 5.11 Create `app/components/output-format.tsx` — WAV/MP3/Opus format selector with description hint
+- [✅] 5.12 Create `app/components/tts-form.tsx` — Assembles all form sub-components into the complete TTS generation form
+- [✅] 5.13 Create `app/hooks/use-tts-generation.ts` — Form state management, validation logic, generation submission, audio result state
+- [✅] 5.14 Create `app/hooks/use-ui-state.ts` — Debounced (750ms) UI state persistence to server via saveSettings
+- [✅] 5.15 Create `app/hooks/use-model-info.ts` — Model info state, pending model change tracking, model-type derived UI flags
 
 ## Phase 6: Audio Player
 
