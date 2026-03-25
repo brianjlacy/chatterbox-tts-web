@@ -6,11 +6,13 @@ export const Route = createFileRoute('/')({
 
 function HomePage() {
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold">Chatterbox TTS Server</h1>
-      <p className="mt-2 text-muted-foreground">
-        TanStack Start application — scaffolding complete.
-      </p>
+    <div className="mx-auto max-w-7xl p-4">
+      <div className="rounded-lg border border-border bg-card p-6 text-card-foreground shadow-sm">
+        <h2 className="text-xl font-semibold">Generate Speech</h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          TTS form components will be built in Phase 5.
+        </p>
+      </div>
     </div>
   )
 }

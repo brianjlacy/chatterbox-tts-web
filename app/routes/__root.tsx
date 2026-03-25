@@ -5,6 +5,10 @@ import {
   ScrollRestoration,
   createRootRoute,
 } from '@tanstack/react-router'
+import { Toaster } from 'sonner'
+import { ThemeProvider } from '~/hooks/use-theme'
+import { Navbar } from '~/components/navbar'
+import { Footer } from '~/components/footer'
 import appCss from '~/styles/globals.css?url'
 
 export const Route = createRootRoute({
@@ -39,10 +43,15 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 
 function RootLayout() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <main className="flex-1">
-        <Outlet />
-      </main>
-    </div>
+    <ThemeProvider>
+      <div className="flex min-h-screen flex-col">
+        <Navbar />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+      <Toaster richColors closeButton position="top-right" />
+    </ThemeProvider>
   )
 }
