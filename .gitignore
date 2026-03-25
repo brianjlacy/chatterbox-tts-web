@@ -46,3 +46,20 @@ htmlcov/
 
 # Ignore log files
 *.log
+logs/
+
+# Node.js
+node_modules/
+.vinxi/
+.output/
+*.tsbuildinfo
+
+# TanStack Start / Vinxi
+app/routeTree.gen.ts
+
+# Testing
+coverage/
+
+# Playwright
+test-results/
+playwright-report/
