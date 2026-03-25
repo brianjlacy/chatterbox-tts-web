@@ -46,15 +46,15 @@
 
 ## Phase 4: Layout & Theme
 
-- [ ] 4.1 Create `app/styles/globals.css` — Tailwind v4 imports, CSS custom properties for light/dark themes (shadcn/ui compatible)
-- [ ] 4.2 Create `app/hooks/use-theme.tsx` — ThemeProvider React Context + `useTheme()` hook (localStorage + server persistence)
-- [ ] 4.3 Create `app/components/theme-toggle.tsx` — Sun/moon icon toggle button using Lucide icons
-- [ ] 4.4 Create `app/components/navbar.tsx` — App title link, model badge slot, API docs link, theme toggle
-- [ ] 4.5 Create `app/components/model-badge.tsx` — Colored badge showing model type (turbo ⚡ / original / multilingual 🌍) with status dot
-- [ ] 4.6 Create `app/components/footer.tsx` — GitHub link, "Powered by TanStack Start"
-- [ ] 4.7 Update `app/routes/__root.tsx` — Root layout with ThemeProvider, Navbar, Footer, Toaster (sonner), Outlet
-- [ ] 4.8 Create placeholder `app/routes/index.tsx` — Basic page with layout verification
-- [ ] 4.9 Verify layout renders correctly with dark/light theme toggle working
+- [✅] 4.1 Create `app/styles/globals.css` — Tailwind v4 imports, CSS custom properties for light/dark themes (shadcn/ui compatible) NOTE: Created in Phase 1.
+- [✅] 4.2 Create `app/hooks/use-theme.tsx` — ThemeProvider React Context + `useTheme()` hook (localStorage + server persistence)
+- [✅] 4.3 Create `app/components/theme-toggle.tsx` — Sun/moon icon toggle button using Lucide icons
+- [✅] 4.4 Create `app/components/navbar.tsx` — App title link, model badge slot, API docs link, theme toggle
+- [✅] 4.5 Create `app/components/model-badge.tsx` — Colored badge showing model type (turbo ⚡ / original / multilingual 🌍) with status dot
+- [✅] 4.6 Create `app/components/footer.tsx` — GitHub link, "Powered by TanStack Start"
+- [✅] 4.7 Update `app/routes/__root.tsx` — Root layout with ThemeProvider, Navbar, Footer, Toaster (sonner), Outlet
+- [✅] 4.8 Create placeholder `app/routes/index.tsx` — Basic page with layout verification
+- [✅] 4.9 Verify layout renders correctly with dark/light theme toggle working
 
 ## Phase 5: TTS Form Components
 
