@@ -1,9 +1,10 @@
 interface TextInputProps {
   value: string
   onChange: (value: string) => void
+  textareaRef?: React.Ref<HTMLTextAreaElement>
 }
 
-export function TextInput({ value, onChange }: TextInputProps) {
+export function TextInput({ value, onChange, textareaRef }: TextInputProps) {
   return (
     <div className="space-y-1">
       <label htmlFor="text" className="text-sm font-medium text-foreground">
@@ -15,6 +16,7 @@ export function TextInput({ value, onChange }: TextInputProps) {
       <div className="relative">
         <textarea
           id="text"
+          ref={textareaRef}
           rows={8}
           value={value}
           onChange={(e) => onChange(e.target.value)}

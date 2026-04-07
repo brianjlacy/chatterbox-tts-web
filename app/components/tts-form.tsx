@@ -90,9 +90,7 @@ export function TTSForm({
         <ModelSelector modelInfo={modelInfo} onApplyChange={onApplyModelChange} />
 
         {/* Text Input */}
-        <div ref={textareaRef as React.RefObject<HTMLDivElement>}>
-          <TextInput value={formState.text} onChange={onTextChange} />
-        </div>
+        <TextInput value={formState.text} onChange={onTextChange} textareaRef={textareaRef} />
 
         {/* Paralinguistic Tags (Turbo only) */}
         <ParalinguisticTags visible={showParalinguisticTags} onInsertTag={onInsertTag} />

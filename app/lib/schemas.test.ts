@@ -49,6 +49,12 @@ describe('ttsRequestSchema', () => {
       ttsRequestSchema.parse({ text: 'test', voice_mode: 'predefined', temperature: 2.0 }),
     ).toThrow()
   })
+
+  it('rejects chunk sizes above the Python server limit', () => {
+    expect(() =>
+      ttsRequestSchema.parse({ text: 'test', voice_mode: 'predefined', chunk_size: 800 }),
+    ).toThrow()
+  })
 })
 
 describe('openAiSpeechRequestSchema', () => {

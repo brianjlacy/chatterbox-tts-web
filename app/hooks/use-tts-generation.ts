@@ -13,7 +13,7 @@ const DEFAULT_FORM_STATE: TTSFormState = {
   speedFactor: PARAM_RANGES.speedFactor.default,
   seed: 0,
   language: 'en',
-  outputFormat: 'mp3',
+  outputFormat: 'wav',
   splitText: true,
   chunkSize: PARAM_RANGES.chunkSize.default,
 }

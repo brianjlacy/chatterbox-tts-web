@@ -56,10 +56,10 @@ export const OUTPUT_FORMATS = [
 
 export const PARAM_RANGES = {
   temperature: { min: 0, max: 1.5, step: 0.01, default: 0.8 },
-  exaggeration: { min: 0, max: 2.0, step: 0.01, default: 0.5 },
-  cfgWeight: { min: 0, max: 2.0, step: 0.01, default: 0.5 },
+  exaggeration: { min: 0.25, max: 2.0, step: 0.01, default: 0.5 },
+  cfgWeight: { min: 0.2, max: 1.0, step: 0.01, default: 0.5 },
   speedFactor: { min: 0.25, max: 4.0, step: 0.05, default: 1.0 },
-  chunkSize: { min: 50, max: 1000, step: 10, default: 120 },
+  chunkSize: { min: 50, max: 500, step: 10, default: 120 },
 } as const
 
 export const DEBOUNCE_DELAY_MS = 750

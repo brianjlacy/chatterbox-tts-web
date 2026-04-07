@@ -1,5 +1,7 @@
 # CUDA 12.8 Support for RTX 5090 and Blackwell GPUs
 
+> Legacy guide. This document applies to running the preserved Python server directly from `python-server/`. The main project docs for the Node/TanStack app live in the repo root.
+
 ## Overview
 
 This guide provides instructions for running Chatterbox TTS Server with **CUDA 12.8 and PyTorch 2.8.0**, which includes support for the new **RTX 5090 and Blackwell architecture (sm_120)** GPUs.

@@ -20,7 +20,29 @@ import { getPredefinedVoices } from '~/server/functions/get-voices'
 import { getReferenceFiles } from '~/server/functions/get-reference-files'
 import { getModelInfoFn } from '~/server/functions/get-model-info'
 import { generateTts } from '~/server/functions/generate-tts'
+import { uploadPredefinedVoice, uploadReferenceFiles } from '~/server/functions/upload-files'
 import type { InitialData, Voice, Preset, OutputFormat, VoiceMode } from '~/lib/types'
+
+async function fileToBase64(file: File): Promise<string> {
+  const bytes = new Uint8Array(await file.arrayBuffer())
+  const chunkSize = 0x8000
+  let binary = ''
+
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize))
+  }
+
+  return btoa(binary)
+}
+
+async function encodeUploadFiles(files: FileList): Promise<Array<{ name: string; data: string }>> {
+  return Promise.all(
+    Array.from(files).map(async (file) => ({
+      name: file.name,
+      data: await fileToBase64(file),
+    })),
+  )
+}
 
 export const Route = createFileRoute('/')({
   loader: async () => {
@@ -67,20 +89,13 @@ function HomePage() {
   }, [tts.formState, theme, tts.activePreset, hideChunkWarning, hideGenWarning, saveState])
 
   // Handlers
-  const handleGenerate = useCallback(() => {
-    const error = tts.validate(modelInfo)
-    if (error) {
-      toast.error(error)
-      return
-    }
-
-    if (!hideGenWarning) {
-      setShowGenModal(true)
-      return
-    }
-
-    proceedToGenerate()
-  }, [tts.formState, modelInfo, hideGenWarning])
+  const shouldShowChunkWarning = useCallback(() => (
+      tts.formState.splitText
+      && tts.formState.text.length >= tts.formState.chunkSize * 1.5
+      && tts.formState.voiceMode === 'clone'
+      && tts.formState.seed === 0
+      && !hideChunkWarning
+  ), [hideChunkWarning, tts.formState])
 
   const proceedToGenerate = useCallback(async () => {
     tts.setIsGenerating(true)
@@ -129,7 +144,27 @@ function HomePage() {
     } finally {
       tts.setIsGenerating(false)
     }
-  }, [tts.formState])
+  }, [tts.formState, tts.setAudioResult, tts.setIsGenerating])
+
+  const handleGenerate = useCallback(() => {
+    const error = tts.validate(modelInfo)
+    if (error) {
+      toast.error(error)
+      return
+    }
+
+    if (!hideGenWarning) {
+      setShowGenModal(true)
+      return
+    }
+
+    if (shouldShowChunkWarning()) {
+      setShowChunkModal(true)
+      return
+    }
+
+    proceedToGenerate()
+  }, [hideGenWarning, modelInfo, proceedToGenerate, shouldShowChunkWarning, tts.validate])
 
   const handleApplyModelChange = useCallback(async (selector: string) => {
     try {
@@ -146,12 +181,28 @@ function HomePage() {
 
   const handleUploadPredefinedVoice = useCallback(async (files: FileList) => {
     toast.info(`Uploading ${files.length} file(s)...`)
-    // Note: file upload via server functions requires base64 encoding
-    // This is a simplified version; production would use FormData via API route
-    toast.warning('File upload requires the Python backend to be running.')
-    const refreshed = await getPredefinedVoices()
-    setVoices(refreshed)
-  }, [])
+
+    try {
+      const result = await uploadPredefinedVoice({
+        data: { files: await encodeUploadFiles(files) },
+      })
+
+      setVoices(result.all_predefined_voices)
+
+      if (result.uploaded_files.length === 1) {
+        tts.setPredefinedVoiceId(result.uploaded_files[0])
+      }
+
+      if (result.errors.length > 0) {
+        toast.warning(`Uploaded ${result.uploaded_files.length} file(s) with ${result.errors.length} issue(s).`)
+        return
+      }
+
+      toast.success(`Uploaded ${result.uploaded_files.length} predefined voice file(s).`)
+    } catch (err) {
+      toast.error(`Predefined voice upload failed: ${err instanceof Error ? err.message : String(err)}`)
+    }
+  }, [tts.setPredefinedVoiceId])
 
   const handleRefreshPredefinedVoices = useCallback(async () => {
     const refreshed = await getPredefinedVoices()
@@ -161,10 +212,28 @@ function HomePage() {
 
   const handleUploadReferenceFile = useCallback(async (files: FileList) => {
     toast.info(`Uploading ${files.length} file(s)...`)
-    toast.warning('File upload requires the Python backend to be running.')
-    const refreshed = await getReferenceFiles()
-    setReferenceFiles(refreshed)
-  }, [])
+
+    try {
+      const result = await uploadReferenceFiles({
+        data: { files: await encodeUploadFiles(files) },
+      })
+
+      setReferenceFiles(result.all_reference_files)
+
+      if (result.uploaded_files.length === 1) {
+        tts.setReferenceAudioFilename(result.uploaded_files[0])
+      }
+
+      if (result.errors.length > 0) {
+        toast.warning(`Uploaded ${result.uploaded_files.length} file(s) with ${result.errors.length} issue(s).`)
+        return
+      }
+
+      toast.success(`Uploaded ${result.uploaded_files.length} reference file(s).`)
+    } catch (err) {
+      toast.error(`Reference file upload failed: ${err instanceof Error ? err.message : String(err)}`)
+    }
+  }, [tts.setReferenceAudioFilename])
 
   const handleRefreshReferenceFiles = useCallback(async () => {
     const refreshed = await getReferenceFiles()
@@ -272,6 +341,10 @@ function HomePage() {
         onAcknowledge={(dontShow) => {
           if (dontShow) setHideGenWarning(true)
           setShowGenModal(false)
+          if (shouldShowChunkWarning()) {
+            setShowChunkModal(true)
+            return
+          }
           proceedToGenerate()
         }}
       />

@@ -126,3 +126,10 @@
 - [✅] 10.10 Update README.md to reflect the new Node.js architecture, development workflow, and deployment
 - [✅] 10.11 Final review: remove dead code, ensure TypeScript compiles cleanly with no warnings NOTE: ESLint 0 errors, 0 warnings. Dev server starts cleanly.
 - [✅] 10.12 Run full test suite (unit, integration, E2E) — all must pass at 100% NOTE: 7/7 unit tests passing. E2E and integration tests require running Python engine.
+
+## Phase 11: Review Follow-Up
+
+- [ ] 11.1 Clarify shared config ownership between the Node app and the legacy Python backend, especially around port configuration and the meaning of `server.port`.
+- [ ] 11.2 Expand automated coverage beyond schemas to cover the Python proxy contract, uploads, and the main route interaction flow.
+- [ ] 11.3 Decide whether the chunk warning flow should stay, be simplified, or be removed now that the current UI only exposes fixed voice modes.
+- [ ] 11.4 Revisit dependency versions and `npm audit` findings once upstream Vite/TanStack patches are available.

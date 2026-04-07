@@ -1,5 +1,7 @@
 # Chatterbox TTS Server - Technical Documentation
 
+> Legacy reference. This document describes the preserved Python server in `python-server/`. The primary implementation docs for the Node/TanStack app are in the repo root (`README.md`, `SPECIFICATION.md`, and `REVIEW.md`).
+
 **Version:** 1.0.0
 **Last Updated:** 5/31/2025
 **Project Repository:** [https://github.com/devnen/Chatterbox-TTS-Server](https://github.com/devnen/Chatterbox-TTS-Server)

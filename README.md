@@ -1,120 +1,144 @@
 # Chatterbox TTS Web
 
-A modern web interface for the [Chatterbox TTS](https://github.com/resemble-ai/chatterbox) text-to-speech engine, built with **TanStack Start**, **React 19**, **TypeScript**, **Tailwind CSS v4**, and **shadcn/ui**.
+This repository is the Node/TypeScript/React conversion of the Chatterbox TTS web application.
+
+The web UI, server-side orchestration, and API proxy now live in the TanStack Start app under `app/`. Audio inference still runs in the preserved Python server under `python-server/`.
+
+## Current Status
+
+Verified on `2026-04-06`.
+
+- `eslint` passes.
+- `vitest` passes (`app/lib/schemas.test.ts`, 8 tests).
+- `vite build` passes.
+- The React app now proxies the Python routes that actually exist in this repo: `/tts`, `/api/model-info`, `/restart_server`, and `/v1/audio/speech`.
+- Voice and reference-file uploads are wired in the React UI.
+
+This repo does **not** yet include a newly separated "minimal engine-only" Python service. The current implementation integrates with the legacy Python server contract that is preserved in `python-server/`.
 
 ## Architecture
 
-The application uses a **proxy architecture**:
-
+```text
+Browser (React 19 UI)
+  -> TanStack Start app (Node.js)
+  -> preserved Python server (FastAPI + PyTorch)
 ```
-Browser (React SPA) → Node.js (TanStack Start) → Python TTS Engine (FastAPI)
-```
 
-- **Node.js frontend** handles UI, configuration, file management, and presets
-- **Python backend** handles TTS synthesis via PyTorch/chatterbox-tts (required for ML inference)
+The Node/TanStack layer owns:
 
-The original Python application is fully preserved in the `python-server/` directory for reference.
+- routing and page rendering
+- form state and UI persistence
+- file listing and uploads
+- config reads and writes
+- proxying the OpenAI-compatible speech route
+
+The Python layer still owns:
+
+- model loading
+- TTS generation
+- audio chunking and stitching
+- audio encoding
+- model hot-swap
+- GPU / PyTorch runtime concerns
 
 ## Quick Start
 
 ### Prerequisites
 
 - Node.js 22+
-- Python 3.10+ (for the TTS engine)
-- NVIDIA GPU with CUDA (recommended) or CPU
+- Python 3.10+
+- A working Python environment for the legacy backend
+- GPU support is optional but recommended for real synthesis workloads
 
-### Development
+### 1. Install Node dependencies
 
 ```bash
-# Terminal 1: Start the Python TTS engine
-cd python-server
-pip install -r requirements.txt
-python server.py --port 8005
-
-# Terminal 2: Start the Node.js frontend
 npm install
+```
+
+### 2. Install Python dependencies
+
+```bash
+python -m pip install -r python-server/requirements.txt
+```
+
+Use the legacy docs in `python-server/` if you need CUDA 12.8 or Colab-specific setup.
+
+### 3. Check backend port configuration
+
+The Node app expects the Python backend at `http://localhost:8005` by default.
+
+Before launching the Python backend, make sure the backend is not trying to bind to the same port as the Node app. In practice that means reviewing the shared root `config.yaml` and aligning the Python server port with `server.python_engine_url`.
+
+### 4. Start the Python backend from the repo root
+
+Starting it from the repo root keeps it pointed at the shared `config.yaml`, `voices/`, and `reference_audio/` directories:
+
+```bash
+python python-server/server.py
+```
+
+### 5. Start the Node app
+
+```bash
 npm run dev
 ```
 
-The app will be available at `http://localhost:8004`.
+The Node app runs at `http://localhost:8004`.
 
-### Production
+## OpenAI-Compatible API
+
+The TanStack app exposes:
+
+```text
+POST /api/v1/audio/speech
+```
+
+That route validates the request and then proxies the call to the legacy Python server's `/v1/audio/speech` endpoint.
+
+## Project Layout
+
+```text
+app/                    TanStack Start app
+app/components/         React UI components
+app/hooks/              Client hooks and UI state helpers
+app/lib/                Shared types, constants, schemas, utilities
+app/server/             Server-only config, file, and proxy code
+app/api/                API routes exposed by the Node app
+python-server/          Preserved legacy Python server
+voices/                 Shared predefined voice files
+reference_audio/        Shared uploaded reference audio
+config.yaml             Shared runtime config
+presets.yaml            Preset definitions
+SPECIFICATION.md        Current implementation contract
+REVIEW.md               Review summary and follow-up list
+TODO.md                 Additive project tracking
+```
+
+## Documentation Map
+
+- `README.md`: current setup and repo overview
+- `SPECIFICATION.md`: current implementation contract
+- `REVIEW.md`: verified findings, fixes, and remaining risks
+- `python-server/documentation.md`: legacy Python server reference
+- `python-server/README_CUDA128.md`: legacy CUDA 12.8 setup guide
+- `python-server/README_Colab.md`: legacy Colab setup guide
+
+## Known Gaps
+
+The highest-value remaining issues are tracked in `REVIEW.md` and appended to `TODO.md`. The most important ones today are:
+
+- shared config ownership between the Node app and Python backend is still confusing
+- automated coverage is still thin outside schema validation
+- dependency advisories remain in the current Vite/TanStack toolchain
+
+## Verification
+
+Commands run during this review:
 
 ```bash
-npm run build
-npm run start
+./node_modules/.bin/eslint.cmd .
+./node_modules/.bin/vitest.cmd run
+./node_modules/.bin/vite.cmd build
+npm audit --json
 ```
-
-## Project Structure
-
-```
-├── app/                    # TanStack Start application
-│   ├── routes/             # File-based routes (__root.tsx, index.tsx)
-│   ├── components/         # React components (TTS form, audio player, etc.)
-│   ├── hooks/              # Custom React hooks (theme, TTS generation, WaveSurfer)
-│   ├── lib/                # Types, Zod schemas, constants, utilities
-│   ├── server/             # Server-side code
-│   │   ├── functions/      # TanStack server functions (RPC)
-│   │   ├── config-manager.ts
-│   │   ├── file-manager.ts
-│   │   ├── tts-proxy.ts
-│   │   └── audio-processing.ts
-│   └── styles/             # Tailwind CSS globals
-├── python-server/          # Original Python application (preserved)
-├── voices/                 # Predefined voice .wav files
-├── reference_audio/        # User-uploaded reference audio
-├── config.yaml             # Runtime configuration (YAML)
-├── presets.yaml             # TTS presets (YAML)
-├── vite.config.ts          # Vite + TanStack Start config
-├── SPECIFICATION.md        # Full project specification
-├── TODO.md                 # Implementation tracking
-└── INSTRUCTIONS.md         # Operating procedures
-```
-
-## Features
-
-- **Multiple TTS Models**: Chatterbox Original, Turbo (with paralinguistic tags), and Multilingual (23 languages)
-- **Voice Cloning**: Upload reference audio for voice cloning
-- **Predefined Voices**: Pre-built voice library with import/export
-- **Audio Player**: WaveSurfer.js waveform visualization with play/pause/download
-- **Text Chunking**: Automatic text splitting for long-form content (audiobooks, articles)
-- **Audio Stitching**: Equal-power crossfade between chunks for seamless output
-- **Presets**: Quick-load text + parameter combinations
-- **Configuration**: In-app settings management with YAML persistence
-- **Dark/Light Theme**: Full theme support with persistence
-- **OpenAI-Compatible API**: `POST /api/v1/audio/speech` endpoint
-
-## Configuration
-
-Settings are stored in `config.yaml`. Key settings:
-
-| Setting | Default | Description |
-|---------|---------|-------------|
-| `server.port` | 8004 | Node.js server port |
-| `server.python_engine_url` | `http://localhost:8005` | Python TTS engine URL |
-| `model.repo_id` | `chatterbox-turbo` | Active TTS model |
-| `generation_defaults.*` | Various | Default generation parameters |
-| `audio_output.format` | `wav` | Default output format |
-
-## Tech Stack
-
-- **TanStack Start** — Full-stack React framework (Vite 7, Nitro)
-- **React 19** — UI library
-- **TypeScript 5.7** — Type safety (strict mode)
-- **Tailwind CSS v4** — Utility-first styling
-- **shadcn/ui + Radix UI** — Component primitives
-- **WaveSurfer.js** — Audio waveform visualization
-- **Zod** — Runtime validation
-- **sonner** — Toast notifications
-- **Vitest** — Unit/integration testing
-
-## Testing
-
-```bash
-npm test          # Run unit tests
-npm run lint      # Run ESLint
-```
-
-## License
-
-See [LICENSE](LICENSE) for details.
