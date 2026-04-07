@@ -3,7 +3,7 @@ import { ttsRequestSchema } from '~/lib/schemas'
 import { generateSpeech } from '~/server/tts-proxy'
 
 export const generateTts = createServerFn({ method: 'POST' })
-  .validator((data: unknown) => ttsRequestSchema.parse(data))
+  .inputValidator((data: unknown) => ttsRequestSchema.parse(data))
   .handler(async ({ data }) => {
     const result = await generateSpeech(data)
 
@@ -21,7 +21,7 @@ export const generateTts = createServerFn({ method: 'POST' })
       audio_base64: base64,
       filename,
       sample_rate: result.sample_rate,
-      format: data.output_format,
-      chunks_processed: data.split_text ? Math.max(1, Math.ceil(data.text.length / data.chunk_size)) : 1,
+      format: result.content_type.split('/')[1],
+      chunks_processed: result.chunks_processed ?? 1,
     }
   })

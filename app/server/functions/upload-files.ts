@@ -17,7 +17,7 @@ interface UploadVoiceResult extends UploadResult {
 }
 
 export const uploadReferenceFiles = createServerFn({ method: 'POST' })
-  .validator((data: unknown) => data as { files: Array<{ name: string; data: string }> })
+  .inputValidator((data: unknown) => data as { files: Array<{ name: string; data: string }> })
   .handler(async ({ data }): Promise<UploadReferenceResult> => {
     const targetDir = getReferenceAudioPath()
     const uploadedFiles: string[] = []
@@ -42,7 +42,7 @@ export const uploadReferenceFiles = createServerFn({ method: 'POST' })
   })
 
 export const uploadPredefinedVoice = createServerFn({ method: 'POST' })
-  .validator((data: unknown) => data as { files: Array<{ name: string; data: string }> })
+  .inputValidator((data: unknown) => data as { files: Array<{ name: string; data: string }> })
   .handler(async ({ data }): Promise<UploadVoiceResult> => {
     const targetDir = getVoicesPath()
     const uploadedFiles: string[] = []

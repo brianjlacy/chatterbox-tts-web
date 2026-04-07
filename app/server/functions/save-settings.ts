@@ -3,7 +3,7 @@ import { configManager } from '~/server/config-manager'
 import type { DeepPartial, AppConfig, UpdateStatusResponse } from '~/lib/types'
 
 export const saveSettings = createServerFn({ method: 'POST' })
-  .validator((data: unknown) => data as DeepPartial<AppConfig>)
+  .inputValidator((data: unknown) => data as DeepPartial<AppConfig>)
   .handler(async ({ data }): Promise<UpdateStatusResponse> => {
     const success = configManager.update(data)
 
