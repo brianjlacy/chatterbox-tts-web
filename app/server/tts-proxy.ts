@@ -193,16 +193,28 @@ export async function generateSpeech(
     // 3. Per-chunk synthesis
     const segments: Float32Array[] = []
     let sampleRate = 24000
-    for (const chunk of chunks) {
-      const wavBytes = await callSynthesize({ text: chunk, ...inferenceParams })
-      const decoded = decodeWav(wavBytes)
-      sampleRate = decoded.sampleRate
-      segments.push(decoded.audio)
+    for (let i = 0; i < chunks.length; i++) {
+      const chunk = chunks[i]
+      console.log(`[TTSProxy] Chunk ${i + 1}/${chunks.length}: ${chunk.length} chars`)
+      try {
+        const wavBytes = await callSynthesize({ text: chunk, ...inferenceParams })
+        const decoded = decodeWav(wavBytes)
+        sampleRate = decoded.sampleRate
+        segments.push(decoded.audio)
+        console.log(`[TTSProxy] Chunk ${i + 1} done: ${decoded.audio.length} samples`)
+      } catch (err) {
+        console.error(`[TTSProxy] Chunk ${i + 1}/${chunks.length} FAILED:`, err)
+        throw new Error(`Chunk ${i + 1}/${chunks.length} failed: ${err}`)
+      }
     }
+    console.log(`[TTSProxy] All chunks done. Stitching ${segments.length} segments...`)
 
     // 4. Stitch
     const enableCrossfade = configManager.getBool('audio_processing.enable_crossfade', true)
     let audio = stitchAudioSegments(segments, sampleRate, enableCrossfade)
+    if (audio.length === 0) {
+      throw new Error('Synthesis produced empty audio — no samples generated')
+    }
 
     // 5. Speed factor
     if (params.speed_factor !== 1.0) {

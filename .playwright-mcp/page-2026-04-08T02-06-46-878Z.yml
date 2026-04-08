@@ -1,0 +1,196 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Chatterbox TTS Server" [ref=e6] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e7]:
+          - link "API Docs" [ref=e8] [cursor=pointer]:
+            - /url: /docs
+          - button "Toggle theme" [ref=e9]:
+            - generic [ref=e10]: Toggle theme
+            - img [ref=e11]
+    - main [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e20]:
+          - heading "Generate Speech" [level=2] [ref=e21]
+          - generic [ref=e23]:
+            - generic [ref=e24]:
+              - generic [ref=e25]: "Active Model:"
+              - combobox "Active Model:" [ref=e26]:
+                - option "Chatterbox Turbo (Fast, English)" [selected]
+                - option "Chatterbox Original (English)"
+                - option "Chatterbox Multilingual (23 Languages)"
+            - generic [ref=e29]: ChatterboxTurboTTS loaded on cpu
+          - generic [ref=e30]:
+            - text: Text to synthesize
+            - paragraph [ref=e31]: Enter the text you want to convert to speech. For audiobooks, you can paste long chapters.
+            - generic [ref=e32]:
+              - textbox "Text to synthesize" [ref=e33]:
+                - /placeholder: Enter text here...
+              - generic [ref=e34]: 0 Characters
+          - generic [ref=e35]:
+            - generic [ref=e36]:
+              - generic [ref=e37]: "Insert Tag:"
+              - button "😄 laugh" [ref=e38]
+              - button "😊 chuckle" [ref=e39]
+              - button "😮‍💨 sigh" [ref=e40]
+              - button "😲 gasp" [ref=e41]
+              - button "🤧 cough" [ref=e42]
+              - button "🗣️ clear throat" [ref=e43]
+              - button "👃 sniff" [ref=e44]
+              - button "😩 groan" [ref=e45]
+              - button "🤫 shush" [ref=e46]
+            - paragraph [ref=e47]: Click a tag to insert it at your cursor position. Tags produce natural vocal reactions in the generated audio.
+          - generic [ref=e49]:
+            - button "Generate Speech" [ref=e50]:
+              - img [ref=e51]
+              - text: Generate Speech
+            - generic [ref=e55]:
+              - generic [ref=e56]:
+                - generic [ref=e57]:
+                  - checkbox "Split text into chunks" [checked] [ref=e58]
+                  - generic [ref=e59]: Split text into chunks
+                - generic [ref=e60]:
+                  - generic [ref=e61]: "Chunk Size:"
+                  - slider "Chunk Size:" [ref=e62]: "120"
+                  - generic [ref=e63]: "120"
+              - paragraph [ref=e64]: "Splitting is essential for longer texts like articles or audiobook chapters. Recommended chunk size: ~150–400 characters."
+          - generic [ref=e65]:
+            - text: "Voice Mode:"
+            - generic [ref=e66]:
+              - button "Predefined Voices" [ref=e67]
+              - button "Voice Cloning (Reference)" [ref=e68]
+            - generic [ref=e69]:
+              - text: "Select Predefined Voice:"
+              - generic [ref=e70]:
+                - combobox "Select Predefined Voice:" [ref=e71]:
+                  - option "-- Select Voice --" [selected]
+                  - option "Abigail"
+                  - option "Adrian"
+                  - option "Alexander"
+                  - option "Alice"
+                  - option "Austin"
+                  - option "Axel"
+                  - option "Connor"
+                  - option "Cora"
+                  - option "Elena"
+                  - option "Eli"
+                  - option "Emily"
+                  - option "Everett"
+                  - option "Gabriel"
+                  - option "Gianna"
+                  - option "Henry"
+                  - option "Ian"
+                  - option "Jade"
+                  - option "Jeremiah"
+                  - option "Jordan"
+                  - option "Julian"
+                  - option "Layla"
+                  - option "Leonardo"
+                  - option "Michael"
+                  - option "Miles"
+                  - option "Olivia"
+                  - option "Ryan"
+                  - option "Taylor"
+                  - option "Thomas"
+                - button "Import" [ref=e72]:
+                  - img [ref=e73]
+                  - text: Import
+                - button "Refresh" [ref=e76]:
+                  - img [ref=e77]
+                  - text: Refresh
+          - generic [ref=e82]:
+            - text: "Load Example Preset:"
+            - generic [ref=e83]:
+              - 'button "⚡ Turbo: Tech Support Meltdown" [ref=e84]'
+              - 'button "⚡ Turbo: The Overly Dramatic Chef" [ref=e85]'
+              - 'button "⚡ Turbo: Conspiracy Podcast Host" [ref=e86]'
+              - 'button "⚡ Turbo: First-Time Skydiver" [ref=e87]'
+              - 'button "⚡ Turbo: The Overworked Parent''s Bedtime Story" [ref=e88]'
+              - 'button "⚡ Turbo: Escape Room Panic" [ref=e89]'
+              - 'button "⚡ Turbo: Nature Documentary Narrator Gone Wrong" [ref=e90]'
+              - 'button "⚡ Turbo: The Emotional Movie Reviewer" [ref=e91]'
+              - 'button "⚡ Turbo: Nervous Wedding Toast" [ref=e92]'
+              - button "Long Story Excerpt (Chunking Test)" [ref=e93]
+              - button "Noir Detective Monologue" [ref=e94]
+              - button "Children's Story Narrator" [ref=e95]
+              - button "Motivational Speech" [ref=e96]
+              - button "Scientific Abstract Reading" [ref=e97]
+              - button "Fairy Tale Villain Monologue" [ref=e98]
+          - group [ref=e99]:
+            - generic "Generation Parameters" [ref=e100] [cursor=pointer]:
+              - generic [ref=e101]: Generation Parameters
+              - img [ref=e102]
+            - generic [ref=e104]:
+              - generic [ref=e105]:
+                - generic [ref=e106]:
+                  - generic [ref=e107]: Temperature (0.8)
+                  - slider "Temperature (0.8)" [ref=e108]: "0.8"
+                - generic [ref=e109]:
+                  - generic [ref=e110]: Speed Factor (1)
+                  - slider "Speed Factor (1)" [ref=e111]: "1"
+                - generic [ref=e112]:
+                  - text: Generation Seed
+                  - spinbutton "Generation Seed" [ref=e113]: "0"
+                  - paragraph [ref=e114]: Integer for reproducible results. Some engines use 0 or -1 for random.
+              - generic [ref=e116]:
+                - text: Output Format
+                - combobox "Output Format" [ref=e117]:
+                  - option "WAV" [selected]
+                  - option "MP3"
+                  - option "Opus"
+                - paragraph [ref=e118]: MP3 is recommended for smaller file sizes (e.g., audiobooks).
+        - generic [ref=e119]:
+          - group [ref=e121]:
+            - generic "Server Configuration" [ref=e122] [cursor=pointer]:
+              - generic [ref=e123]: Server Configuration
+              - img [ref=e124]
+          - generic [ref=e126]:
+            - button "Reset All Settings" [ref=e127]
+            - text: Resets settings to their defaults.
+        - generic [ref=e128]:
+          - heading "Tips & Tricks" [level=2] [ref=e129]
+          - list [ref=e131]:
+            - listitem [ref=e132]:
+              - text: For
+              - strong [ref=e133]: Audiobooks
+              - text: ", use"
+              - strong [ref=e134]: MP3
+              - text: format, enable
+              - strong [ref=e135]: Split text
+              - text: ", and set a chunk size of ~250–500."
+            - listitem [ref=e136]:
+              - text: Use
+              - strong [ref=e137]: Predefined Voices
+              - text: for consistent, high-quality output. You can import new ones.
+            - listitem [ref=e138]:
+              - text: For
+              - strong [ref=e139]: Voice Cloning
+              - text: ", upload clean reference audio ("
+              - code [ref=e140]: .wav
+              - text: /
+              - code [ref=e141]: .mp3
+              - text: ). Quality of reference is key.
+            - listitem [ref=e142]:
+              - text: Experiment with
+              - strong [ref=e143]: Temperature
+              - text: and other generation parameters to fine-tune output.
+            - listitem [ref=e144]:
+              - text: Adjusting
+              - strong [ref=e145]: Speed Factor
+              - text: away from 1.0 is experimental and may cause echo.
+            - listitem [ref=e146]:
+              - text: When using
+              - strong [ref=e147]: Turbo
+              - text: model, you can insert paralinguistic tags like
+              - code [ref=e148]: "[laugh]"
+              - text: or
+              - code [ref=e149]: "[sigh]"
+              - text: for natural vocal reactions.
+    - contentinfo [ref=e150]:
+      - link "View Project on GitHub | Powered by TanStack Start" [ref=e152] [cursor=pointer]:
+        - /url: https://github.com/brianjlacy/chatterbox-tts-web
+        - img [ref=e153]
+        - generic [ref=e156]: View Project on GitHub | Powered by TanStack Start
+  - region "Notifications alt+T"

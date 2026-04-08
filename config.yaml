@@ -1,11 +1,11 @@
 server:
   host: 0.0.0.0
   port: 8004
-  python_engine_port: 8005
   python_engine_url: http://localhost:8005
   log_file_path: logs/tts_server.log
   log_file_max_size_mb: 10
   log_file_backup_count: 5
+  python_engine_port: 8005
   use_ngrok: false
   use_auth: false
   auth_username: user
@@ -38,29 +38,219 @@ audio_processing:
   enable_internal_silence_fix: false
   enable_unvoiced_removal: false
 ui_state:
-  last_text: >
-    [gasp] Okay, we have fifteen minutes left! Fifteen minutes! [groan] How have we been in here for forty-five minutes
-    and only solved two puzzles?! [clear throat] Let's think logically. [sniff] This room smells like fear and bad
-    decisions. [cough] And also someone's very strong cologne, Kevin. [sigh] Okay, the clue says "the answer lies where
-    time stands still." [chuckle] Great, very helpful, very straightforward. [shush] Everyone stop talking for one
-    second! [gasp] Wait, the clock on the wall! It's stuck at three fifteen! [laugh] That's it! That has to be it!
-    [groan] It's not the combination. Of course it's not the combination. [sniff] Why would anything in this room be
-    logical? [sigh] Has anyone checked under the carpet? [gasp] There's a hidden compartment! [chuckle] Kevin, you're
-    standing on a clue! Classic Kevin! [clear throat] Okay, it's another riddle. "What has keys but no locks, space but
-    no room, and you can enter but can't go inside?" [groan] Who writes these things?! [cough] A keyboard! It's a
-    keyboard! [laugh] There's a keyboard painted on the wall! [gasp] Eight minutes! We have eight minutes! [sigh] If we
-    don't escape this room, we're never speaking of this again. [shush] Focus, everyone! [chuckle] We're so close I can
-    taste freedom! [sniff] That or more of Kevin's cologne!
+  last_text: >-
+    Over the following weeks the voice appeared at irregular intervals, brief and unhurried, like an afterthought. It
+    never introduced itself. It didn't ask anything of him. It offered no explanations. It simply... commented.
+
+    On the people around him, sometimes. She looks unwell. He's telling the truth, but only just. On the state of Gala
+    City, occasionally, in that flat and peculiarly detached way — as though reporting conditions to no one in
+    particular. The northern settlement corridors are overcrowded. The drought has been worse than the council has
+    acknowledged publicly. And sometimes on things so mundane, so staggeringly pedantic, that Jass had to bite the
+    inside of his cheek to keep from laughing out loud in the middle of a crowded gate lane. The planet's rotation
+    remains stable. Once, memorably, while he was trying to eat lunch: Wind erosion along the fourth quadrant escarpment
+    has increased by approximately two percent over the last forty-three years.
+
+    Two percent. Forty-three years.
+
+    He'd put down his fork.
+
+    And then sometimes — not often, but enough to make his skin prickle — the voice said something he couldn't easily
+    dismiss. Something that turned out to be right before he could have known. This road is impassable today. He'd taken
+    it anyway. It was impassable. She won't be there when you arrive. She wasn't.
+
+    That had been harder to sleep off.
+
+    The waiting room of Renni Osch's practice was on the fourth floor of a low-rise in the Arts Quarter — the kind of
+    neighborhood that was trying very hard to seem like it had always been nice, and mostly succeeding. The walls were
+    soft grey, and someone had put plants in the corners, real ones, which felt almost ostentatious in Gala City. The
+    light came in warm and diffused through a single tall window. A small mechanical fountain on the desk burbled
+    pointlessly to itself. There were two other people waiting, a woman with a sharp business jacket and the private
+    expression of someone who had decided not to be embarrassed about being here, and a teenage boy examining something
+    on a handheld with practiced disinterest.
+
+    Jass sat with his hat on his knee and tried to look like a man who was comfortable waiting.
+
+    He wasn't.
+
+    The fountain mechanism requires maintenance, the voice noted.
+
+    "I know," Jass muttered, very quietly, out of the corner of his mouth. The woman with the business jacket didn't
+    look up. The teenage boy didn't either.
+
+    At least the voice wasn't loud. It was never loud. It wasn't the sort of thing that would make you spin around
+    looking for someone standing behind you. It occupied some middle distance between thought and sound — distinct,
+    certainly, and unmistakably not him in some quality he couldn't fully articulate — but interior. Private. Which was,
+    he supposed, the only reason he hadn't gone completely to pieces about it yet.
+
+    He was going a little to pieces about it. Hence the waiting room.
+
+    Doctor Osch turned out to be a compact, precise woman in her early fifties with reading glasses she didn't actually
+    seem to need and an unhurried way of listening that Jass found both reassuring and unsettling. She didn't write
+    anything down until the end of the session, and even then only a few lines. She asked him to describe the voice in
+    his own words, and then listened to him describe it for twenty minutes without interrupting, which he found deeply
+    unusual.
+
+    "Do you experience it as intrusive?" she asked.
+
+    "I experience it as weird," Jass said. "Which is in the ballpark."
+
+    "Does it ever tell you to do things?"
+
+    "No."
+
+    "Does it comment on things you're doing? Things you might not want anyone to know?"
+
+    "No," he said. "Mostly it tells me about wind erosion."
+
+    She wrote something down. "And you can distinguish it from your own thoughts."
+
+    "Yes."
+
+    "How?"
+
+    He thought about it. "It doesn't sound like me."
+
+    "In register? In word choice?"
+
+    "Both," he said. "It's very..." He turned his hat in his hands. "Precise. Very precise. I don't think I've ever used
+    the word 'approximately' in my life. Not even once."
+
+    Her expression shifted, almost imperceptibly. Not alarmed. More like interested. She wrote something else down.
+
+    They agreed on three things before the session ended: he'd keep notes when the voice appeared, including what it
+    said and the context; he'd try, when it happened, to respond internally rather than reacting outwardly; and he'd
+    come back in two weeks. She also gave him something to help him sleep. He took the small foil packet and looked at
+    it.
+
+    "Is there a name," he said, "for what you think this might be?"
+
+    She considered the question with the same unhurried care she'd brought to everything. "Several possibilities," she
+    said. "None of which we should land on yet. But I don't want you to be frightened. What you're describing is
+    unusual, but it isn't — based on what you've told me today — dangerous." She tilted her head slightly. "Is it?"
+
+    "No," he said. And then, to be accurate: "Not so far."
+
+
+    He felt better, for a while.
+
+    The notes helped — gave him something to do when the voice appeared, some structure to put around a thing that
+    otherwise had no structure at all. And for the first two weeks he could've sworn the voice got quieter. Less
+    frequent. Fewer comments about escarpments and mechanical fountains. Maybe it was the sleep. Maybe it was just
+    knowing there was someone else who knew about it, that it had a clinical context even if it didn't yet have a name.
+
+    He didn't think about it too much. He had a living to make.
+
+
+    The gate was busy for a midweek morning, three rigs already queued ahead of him in the outbound lane, and Jass eased
+    the Zamboni into line with the particular brand of patience that came from long practice and mild resentment. He had
+    a pickup to make — olastrium, twelve thousand kilos, out of the northern relay, which meant a long pull over open
+    country with the sun in his eyes for most of it — and his mind was already out on the road, running numbers he'd
+    already run twice, worrying about a debt he'd been worrying about for longer than was probably healthy.
+
+    Bernie again. Always Bernie.
+
+    He adjusted his grip and nudged the rig forward as the queue moved, and ran through the figures one more time. The
+    shipment would cover the payment. The payment would satisfy Bernie through the end of the month. The end of the
+    month was a long time away but it was also finite, which was a thing he tried to hold onto.
+
+    He was making his way toward the gate strut when it happened.
+
+    "Jass."
+
+    Not from outside. Not from the comm. Clear as anything, clean as water.
+
+    He yanked the stick and the Zamboni lurched sideways, missing the gate strut by something he would later estimate —
+    generously — at half a meter. He swore. Loudly and specifically, in a way that addressed several different concerns
+    simultaneously.
+
+    "I apologize," said the voice. "I thought speaking to you here where it's private would be preferred. I observe now
+    my error."
+
+    "What the hell!" He was already scanning the rig — cab, rear, all of it. Nothing. Nobody. "Who's there? Where are
+    you?"
+
+    Silence.
+
+    "Oh no," Jass said, his voice dropping to something quieter and considerably more dangerous. "You don't get to bow
+    out now, pal. You're not just in my head, are you."
+
+    "I am."
+
+    "I—" He stopped. Breathed. "Okay. Okay, yeah, you're in my head. That's not what I meant, wiseass."
+
+    "I'm sorry, I'm afraid I don't understand."
+
+    "Who... " he said, enunciating with great deliberateness, "... are... " he settled both hands on the controls, "...
+    you?"
+
+    "Oh. Yes. You can call me the Keeper."
+
+    "The—"
+
+    "Keeper."
+
+    "You good there, bud?" Barb's voice crackled across the comm like a mild electrical fire. "You 'bout took out a gate
+    strut, there. You influenced, J? I needa make a call?"
+
+    Jass exhaled slowly. "Uh — nah, Barb, we're good hon'. I just, uh, spilled my coffee. It was... hot."
+
+    A few moments of static saturated the line before Barb's voice came back.
+
+    "Yeah. Coffee can be like that, J." She let that hang for a moment. "Thought you'd heard. Anyway look, just — don't
+    be taking out my gate struts or I'll come down there and spill a lot more'n hot coffee on yer ass, y'hear? Gonna be
+    more like — like, lava. From all the hellfire. In Hell. Where you gonna be. 'Cause I'm gonna send you there. Catch
+    me?" She was getting more and more fired up by the second, and less and less coherent.
+
+    "Yeah, yeah, Barb, I catch you, I apologize. I'll pay more attention. Sorry."
+
+    "Good," Barb said, her voice suddenly cheerful. "Sorry about your, uh... your nethers, there, J."
+
+    "My — huh?"
+
+    "Your nethers. Your down n' dirty. 'Cause of the coffee?"
+
+    "Oh, geez, uh, I'm fine Barb, but yeah. Thanks."
+
+    Jass stared straight ahead with unusual concentration, adjusting the rig to glide forward perfectly centered in the
+    lane. Upsetting Barb wasn't a great idea for a whole host of reasons.
+
+    "She's a real sweetheart," the voice said. "I've always admired her spunk."
+
+    Barb had nearly made him forget, and the voice made him jump all over again. "Shit."
+
+    This time, though, he'd managed to keep the rig steady. Barb likely wouldn't have noticed anything. Unless — he
+    glanced at the dash.
+
+    "It's okay," said the voice. "Comms are off."
+
+    Jass turned his head as though to stare at a passenger, every bit of incredulity he owned arranged plainly in his
+    expression.
+
+    "Why don't you focus on getting us out of here, Jass," the voice said. "We can talk when you're ready."
+
+    "Gee, thanks," Jass said.
+
+    "You're welcome," the voice replied.
+
+    The rig passed through the gate and out into the flat, pale-golden light of the road. The dome fell away behind him.
+    Open country stretched ahead — wide and brown and ancient and completely indifferent to all of it.
+
+    After a moment, faint as an echo he almost wasn't sure he'd heard at all, the voice said, somewhere in the back of
+    his mind:
+
+    Curious. He's usually better at this.
+
+    Jass Conway drove into the morning, and said nothing, and thought quite a lot.
   last_voice_mode: predefined
-  last_predefined_voice: Emily.wav
+  last_predefined_voice: 6841_88294_000002_000000.wav
   last_reference_file: Gianna.wav
-  last_seed: 3000
-  last_chunk_size: 240
+  last_seed: 0
+  last_chunk_size: 160
   last_split_text_enabled: true
-  theme: light
-  last_preset_name: '⚡ Turbo: Escape Room Panic'
+  theme: dark
+  last_preset_name: '⚡ Turbo: Conspiracy Podcast Host'
   hide_chunk_warning: false
-  hide_generation_warning: false
+  hide_generation_warning: true
 ui:
   title: Chatterbox TTS Server
   show_language_select: true

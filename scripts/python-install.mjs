@@ -5,7 +5,7 @@
  *   Unix/Mac: python-server/venv/bin/pip
  */
 
-import { execSync, spawnSync } from 'node:child_process'
+import { spawnSync } from 'node:child_process'
 import { existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 
@@ -26,7 +26,30 @@ if (!existsSync(venvDir)) {
   console.log(`[python-install] Venv already exists at ${venvDir}`)
 }
 
-// 2. Install requirements
+// 2. Ensure setuptools + wheel are present (absent by default in Python 3.12+ venvs,
+//    required for building source distributions like numpy)
+console.log('[python-install] Installing setuptools/wheel ...')
+const bootstrap = spawnSync(pip, ['install', 'setuptools', 'wheel'], {
+  stdio: 'inherit',
+  shell: false,
+})
+if (bootstrap.status !== 0) {
+  console.error('[python-install] Failed to install setuptools/wheel.')
+  process.exit(1)
+}
+
+// 3. Install chatterbox-tts without its declared deps (bypasses stale numpy<1.26 constraint)
+console.log('[python-install] Installing chatterbox-tts (--no-deps) ...')
+const chatterbox = spawnSync(pip, [
+  'install', '--no-deps',
+  'chatterbox-tts @ git+https://github.com/devnen/chatterbox-v2.git@master',
+], { stdio: 'inherit', shell: false })
+if (chatterbox.status !== 0) {
+  console.error('[python-install] Failed to install chatterbox-tts.')
+  process.exit(1)
+}
+
+// 4. Install remaining requirements (numpy 2.x, torch, fastapi, etc.)
 console.log('[python-install] Installing python-server/requirements.txt ...')
 const result = spawnSync(pip, ['install', '-r', 'python-server/requirements.txt'], {
   stdio: 'inherit',

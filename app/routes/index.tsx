@@ -124,6 +124,9 @@ function HomePage() {
       const genTime = ((endTime - startTime) / 1000).toFixed(2)
 
       // Convert base64 audio to blob URL
+      if (!result?.audio_base64) {
+        throw new Error('Server returned no audio data')
+      }
       const bytes = Uint8Array.from(atob(result.audio_base64), (c) => c.charCodeAt(0))
       const mimeType = `audio/${result.format}`
       const blob = new Blob([bytes], { type: mimeType })
@@ -140,7 +143,7 @@ function HomePage() {
 
       toast.success('Audio generated successfully!')
     } catch (err) {
-      toast.error(`Generation failed: ${err instanceof Error ? err.message : String(err)}`)
+      toast.error(`Generation failed: ${err instanceof Error ? err.message : String(err)}`, { duration: 8000 })
     } finally {
       tts.setIsGenerating(false)
     }

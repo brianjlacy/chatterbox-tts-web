@@ -1,66 +1,47 @@
 # ============================================================================
-# CHATTERBOX TTS SERVER - REQUIREMENTS (CPU-ONLY INSTALLATION)
+# CHATTERBOX TTS MICROSERVICE - REQUIREMENTS
 # ============================================================================
-# This file ensures compatible PyTorch, ML, and audio processing libraries
-# are installed for CPU-only operation. All packages are pinned for stability.
+# Minimal dependencies for the 3-endpoint inference microservice.
+# All orchestration (text chunking, audio stitching, encoding, etc.) lives in Node.
 
-# --- PyTorch CPU-Only Installation Index ---
-# Use PyTorch's official CPU-only package index for torch components
+# --- PyTorch CPU-Only ---
+# Use PyTorch's official CPU-only wheel index.
+# For CUDA or Apple Silicon, see README_CUDA128.md / README_Colab.md.
 --extra-index-url https://download.pytorch.org/whl/cpu
-
-# --- Deep Learning Framework (CPU-Only) ---
-# Pinning a compatible set of torch-related libraries is crucial to avoid dependency conflicts.
-# Updated to use PyTorch 2.5.1 for compatibility with our Colab-compatible chatterbox fork
 torch>=2.6.0
 torchvision>=0.21.0
 torchaudio>=2.6.0
 
-# --- Core TTS Application ---
-# Chatterbox TTS engine - Install from chatterbox-v2 fork
-chatterbox-tts @ git+https://github.com/devnen/chatterbox-v2.git@master
+# --- Chatterbox TTS engine ---
+# Installed via python-install.mjs with --no-deps to bypass an overly-conservative
+# numpy<1.26 constraint in its metadata. The code works fine with numpy 2.x.
+# chatterbox-tts @ git+https://github.com/devnen/chatterbox-v2.git@master
 
-# --- Web Framework & Server ---
-fastapi                         # Modern async web framework
-uvicorn[standard]               # ASGI server with performance extras
+# --- Web framework ---
+fastapi
+uvicorn[standard]
 
-# --- Scientific Computing & ML Libraries ---
-numpy>=1.26.0                   # Fundamental numerical computing
-librosa                         # Advanced audio/music analysis
-safetensors                     # Safe tensor serialization format
-descript-audio-codec            # Audio codec for ML applications
+# --- Audio I/O (server.py uses sf.write to encode the WAV synthesis response) ---
+soundfile
+numpy
 
-# --- Audio I/O & Processing ---
-soundfile                       # Audio file I/O (requires libsndfile system library)
-pydub                          # Simple audio manipulation
-audiotsm                       # Audio time-scale modification
-praat-parselmouth              # Python interface to Praat speech analysis
-                               # NOTE: Use 'praat-parselmouth' not 'parselmouth' 
-                               # to avoid setuptools use_2to3 compatibility issues
+# --- ML support ---
+safetensors                     # Safe tensor serialization (used by chatterbox model loading)
 
-# --- Web & API Utilities ---
-python-multipart               # Form data parsing for FastAPI
-requests                       # HTTP client library
-Jinja2                        # Template engine
-aiofiles                      # Async file operations
-hf_transfer                     # Speed up file transfers with the Hugging Face Hub.
+# --- chatterbox-tts transitive deps ---
+# chatterbox-tts is installed with --no-deps (to bypass its stale numpy<1.26 pin).
+# These are every third-party package actually imported in site-packages/chatterbox/**/*.py.
+librosa                         # tts.py, tts_turbo.py, mel.py, voice_encoder.py
+transformers                    # t3_hf_backend.py, t3.py, tts_turbo.py
+conformer                       # matcha/decoder.py
+omegaconf                       # s3gen/flow.py
+diffusers                       # matcha/decoder.py, transformer.py
+s3tokenizer                     # models/s3tokenizer/s3tokenizer.py
+einops                          # decoder.py, perceiver.py, text_encoder.py
+resemble-perth                  # mtl_tts.py, tts.py, tts_turbo.py, vc.py (module: perth)
+pyloudnorm                      # tts_turbo.py
 
-
-# --- Configuration & Data Processing ---
-PyYAML                        # YAML configuration file support
-watchdog                      # File system event monitoring
-unidecode                     # Unicode text transliteration
-inflect                       # Natural language inflection
-tqdm                          # Progress bars for loops
-
-# ============================================================================
-# INSTALLATION NOTES:
-# 
-# 1. Ensure your virtual environment is activated before installation
-# 2. Run: pip install --upgrade pip
-# 3. Run: pip install -r requirements.txt
-# 4. For parselmouth issues, the package name is 'praat-parselmouth' on PyPI
-#    but you import it as 'import parselmouth' in Python code
-# 5. System dependencies may be required:
-#    - libsndfile (for soundfile package)
-#    - FFmpeg (for some audio processing features)
-# ============================================================================
+# --- Config & utilities ---
+PyYAML                          # config.py reads config.yaml
+hf_transfer                     # Faster HuggingFace model downloads
+tqdm                            # Progress bars during model download

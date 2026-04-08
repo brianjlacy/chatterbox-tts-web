@@ -2,7 +2,6 @@ import {
   HeadContent,
   Outlet,
   Scripts,
-  ScrollRestoration,
   createRootRoute,
 } from '@tanstack/react-router'
 import { Toaster } from 'sonner'
@@ -34,7 +33,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body className="font-sans antialiased">
         {children}
-        <ScrollRestoration />
         <Scripts />
       </body>
     </html>
